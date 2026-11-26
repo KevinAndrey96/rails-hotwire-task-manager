@@ -1,0 +1,32 @@
+<li id="<%= dom_id(task, :item) %>" class="<%= class_names("task", "is-done": task.completed?, "is-overdue": task.overdue?) %>">
+  <%= turbo_frame_tag task do %>
+    <div class="task-row">
+      <%= button_to toggle_project_task_path(project, task, filter: filter), method: :patch,
+            class: "check", aria: { label: t(task.completed? ? ".reopen" : ".complete", title: task.title), pressed: task.completed? } do %>
+        <span aria-hidden="true"><%= task.completed? ? "✓" : "" %></span>
+      <% end %>
+
+      <div class="task-body">
+        <p class="task-title"><%= task.title %></p>
+        <% if task.notes.present? %>
+          <p class="task-notes muted"><%= task.notes %></p>
+        <% end %>
+        <p class="badges">
+          <span class="badge badge-<%= task.priority %>"><%= priority_label(task) %></span>
+          <% if task.due_on %>
+            <span class="<%= class_names("badge", "badge-overdue": task.overdue?) %>">
+              <%= t(task.overdue? ? ".overdue_since" : ".due_on", date: l(task.due_on, format: :short)) %>
+            </span>
+          <% end %>
+        </p>
+      </div>
+
+      <div class="task-actions">
+        <%= link_to t(".edit"), edit_project_task_path(project, task, filter: filter), class: "button button-ghost button-small" %>
+        <%= button_to t(".destroy"), project_task_path(project, task, filter: filter), method: :delete,
+              class: "button button-ghost button-small",
+              form: { data: { turbo_confirm: t(".confirm_destroy", title: task.title) } } %>
+      </div>
+    </div>
+  <% end %>
+</li>

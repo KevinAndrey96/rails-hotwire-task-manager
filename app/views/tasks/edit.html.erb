@@ -1,0 +1,35 @@
+<% content_for :title, t(".title") %>
+
+<%= turbo_frame_tag @task do %>
+  <%= form_with model: [ @project, @task ], class: "stack task-edit" do |form| %>
+    <%= render "shared/errors", record: @task %>
+    <%= hidden_field_tag :filter, @filter %>
+
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title, required: true, maxlength: 140, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= form.label :notes %>
+      <%= form.textarea :notes, rows: 3, maxlength: 2_000 %>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <%= form.label :due_on %>
+        <%= form.date_field :due_on %>
+      </div>
+
+      <div class="field">
+        <%= form.label :priority %>
+        <%= form.select :priority, priority_options %>
+      </div>
+    </div>
+
+    <div class="actions">
+      <%= form.submit t(".submit"), class: "button" %>
+      <%= link_to t("app.cancel"), project_path(@project, filter: @filter), class: "button button-ghost" %>
+    </div>
+  <% end %>
+<% end %>

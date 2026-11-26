@@ -1,0 +1,24 @@
+<% content_for :title, @project.name %>
+<%= turbo_stream_from @project %>
+
+<div class="page-header">
+  <div>
+    <p class="breadcrumb"><%= link_to t("projects.index.title"), projects_path %></p>
+    <h1><%= @project.name %></h1>
+    <% if @project.description.present? %>
+      <p class="muted"><%= @project.description %></p>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= link_to t(".edit"), edit_project_path(@project), class: "button button-ghost" %>
+    <%= button_to t(".destroy"), @project, method: :delete, class: "button button-danger",
+          form: { data: { turbo_confirm: t(".confirm_destroy", name: @project.name) } } %>
+  </div>
+</div>
+
+<section class="card">
+  <%= render "tasks/new_form", project: @project, task: @task, filter: @filter %>
+</section>
+
+<%= render "tasks/board", project: @project, filter: @filter %>

@@ -1,0 +1,5 @@
+<%= turbo_stream.replace dom_id(@project, :board), partial: "tasks/board", locals: { project: @project, filter: @filter } %>
+<% if action_name == "create" %>
+  <%= turbo_stream.replace "new_task", partial: "tasks/new_form", locals: { project: @project, task: Task.new, filter: @filter } %>
+<% end %>
+<%= turbo_stream.update "flash", partial: "shared/flash" %>

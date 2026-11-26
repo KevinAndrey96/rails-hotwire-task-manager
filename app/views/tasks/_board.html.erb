@@ -1,0 +1,27 @@
+<% counts = project.task_counts %>
+<% tasks = project.tasks.filtered(filter).in_display_order.to_a %>
+
+<section id="<%= dom_id(project, :board) %>" class="board">
+  <div class="board-header">
+    <nav class="filters" aria-label="<%= t("tasks.board.filters_label") %>">
+      <% Task::FILTERS.each do |option| %>
+        <%= link_to t("tasks.filters.#{option}"), project_path(project, filter: option),
+              class: [ "filter", ("is-active" if option == filter) ],
+              aria: { current: ("page" if option == filter) } %>
+      <% end %>
+    </nav>
+
+    <div class="board-summary">
+      <progress value="<%= counts[:done] %>" max="<%= [ counts[:total], 1 ].max %>"></progress>
+      <p class="meta"><%= t("tasks.board.summary", done: counts[:done], total: counts[:total], overdue: counts[:overdue]) %></p>
+    </div>
+  </div>
+
+  <% if tasks.any? %>
+    <ul class="task-list">
+      <%= render partial: "tasks/task", collection: tasks, locals: { project: project, filter: filter } %>
+    </ul>
+  <% else %>
+    <p class="empty-state muted"><%= t("tasks.board.empty.#{filter}") %></p>
+  <% end %>
+</section>

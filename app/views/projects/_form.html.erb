@@ -1,0 +1,18 @@
+<%= form_with model: project, class: "stack" do |form| %>
+  <%= render "shared/errors", record: project %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, required: true, maxlength: 80, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.textarea :description, rows: 3, maxlength: 500 %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "button" %>
+    <%= link_to t("app.cancel"), project.persisted? ? project : projects_path, class: "button button-ghost" %>
+  </div>
+<% end %>

@@ -1,0 +1,23 @@
+<div id="new_task">
+  <%= form_with model: [ project, task ], class: "task-form" do |form| %>
+    <%= render "shared/errors", record: task %>
+    <%= hidden_field_tag :filter, filter %>
+
+    <div class="field field-grow">
+      <%= form.label :title, class: "sr-only" %>
+      <%= form.text_field :title, required: true, maxlength: 140, placeholder: t("tasks.new_form.placeholder") %>
+    </div>
+
+    <div class="field">
+      <%= form.label :due_on %>
+      <%= form.date_field :due_on %>
+    </div>
+
+    <div class="field">
+      <%= form.label :priority %>
+      <%= form.select :priority, priority_options %>
+    </div>
+
+    <%= form.submit t("tasks.new_form.submit"), class: "button" %>
+  <% end %>
+</div>

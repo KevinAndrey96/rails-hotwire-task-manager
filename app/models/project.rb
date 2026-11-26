@@ -17,10 +17,14 @@ class Project < ApplicationRecord
       .select("projects.*, COUNT(tasks.id) AS tasks_total, COUNT(tasks.completed_at) AS tasks_done")
   }
 
-  def progress
-    total = tasks.size
-    return 0 if total.zero?
+  def task_counts
+    { total: tasks.count, done: tasks.completed.count, overdue: tasks.overdue.count }
+  end
 
-    (tasks.completed.size * 100.0 / total).round
+  def progress
+    counts = task_counts
+    return 0 if counts[:total].zero?
+
+    (counts[:done] * 100.0 / counts[:total]).round
   end
 end

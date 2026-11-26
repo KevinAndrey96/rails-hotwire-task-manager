@@ -31,6 +31,10 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal [ 0, 0 ], [ counts["Pendientes de la casa"].tasks_total, counts["Pendientes de la casa"].tasks_done ]
   end
 
+  test "task_counts reports totals, completed and overdue tasks" do
+    assert_equal({ total: 4, done: 1, overdue: 1 }, projects(:launch).task_counts)
+  end
+
   test "progress is the rounded share of completed tasks" do
     assert_equal 25, projects(:launch).progress
     assert_equal 0, projects(:errands).progress
