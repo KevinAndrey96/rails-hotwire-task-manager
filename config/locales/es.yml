@@ -1,0 +1,150 @@
+es:
+  app:
+    name: Gestor de tareas
+    description: Gestor de tareas en Ruby on Rails 8 con Hotwire, Turbo Streams y actualizaciones en tiempo real.
+    navigation: Navegación principal
+    sign_out: Cerrar sesión
+    cancel: Cancelar
+    form_errors:
+      one: "Revisa el formulario: hay 1 error."
+      other: "Revisa el formulario: hay %{count} errores."
+
+  activerecord:
+    models:
+      project:
+        one: Proyecto
+        other: Proyectos
+      task:
+        one: Tarea
+        other: Tareas
+      user:
+        one: Usuario
+        other: Usuarios
+    attributes:
+      project:
+        name: Nombre
+        description: Descripción
+      task:
+        title: Título
+        notes: Notas
+        due_on: Fecha límite
+        priority: Prioridad
+      user:
+        email_address: Correo electrónico
+        password: Contraseña
+        password_confirmation: Confirmar contraseña
+
+  helpers:
+    submit:
+      project:
+        create: Crear proyecto
+        update: Guardar cambios
+
+  sessions:
+    rate_limited: Demasiados intentos. Espera unos minutos e inténtalo de nuevo.
+    new:
+      title: Iniciar sesión
+      subtitle: Organiza tus proyectos y tareas en un solo lugar.
+      submit: Entrar
+      forgot_password: ¿Olvidaste tu contraseña?
+      sign_up: Crear una cuenta
+    create:
+      invalid: Correo o contraseña incorrectos.
+    destroy:
+      signed_out: Sesión cerrada.
+
+  registrations:
+    rate_limited: Demasiados registros desde esta conexión. Inténtalo más tarde.
+    new:
+      title: Crear una cuenta
+      subtitle:
+        one: La contraseña debe tener al menos %{count} carácter.
+        other: La contraseña debe tener al menos %{count} caracteres.
+      submit: Registrarme
+      sign_in: Ya tengo una cuenta
+    create:
+      welcome: Cuenta creada. Empieza creando tu primer proyecto.
+
+  passwords:
+    rate_limited: Demasiadas solicitudes. Espera unos minutos e inténtalo de nuevo.
+    invalid_token: El enlace para restablecer la contraseña no es válido o ya expiró.
+    new:
+      title: Recuperar contraseña
+      subtitle: Te enviaremos un enlace para crear una contraseña nueva.
+      submit: Enviar instrucciones
+    create:
+      sent: Si el correo está registrado, recibirás las instrucciones en unos minutos.
+    edit:
+      title: Nueva contraseña
+      submit: Guardar contraseña
+    update:
+      reset: Contraseña actualizada. Ya puedes iniciar sesión.
+
+  passwords_mailer:
+    reset:
+      subject: Restablece tu contraseña
+      greeting: Hola,
+      instructions: "Recibimos una solicitud para cambiar tu contraseña. Puedes crear una nueva en:"
+      link: este enlace
+      expires: El enlace expira en %{time}.
+
+  projects:
+    index:
+      title: Proyectos
+      new: Nuevo proyecto
+      progress: "%{done} de %{total} tareas completadas"
+      empty_title: Todavía no tienes proyectos
+      empty_body: Crea un proyecto para agrupar tus tareas por objetivo.
+    show:
+      edit: Editar
+      destroy: Eliminar
+      confirm_destroy: "¿Eliminar el proyecto «%{name}» y todas sus tareas?"
+    new:
+      title: Nuevo proyecto
+    edit:
+      title: Editar proyecto
+    create:
+      created: Proyecto creado.
+    update:
+      updated: Proyecto actualizado.
+    destroy:
+      destroyed: Proyecto eliminado.
+
+  tasks:
+    priorities:
+      low: Baja
+      normal: Normal
+      high: Alta
+    filters:
+      all: Todas
+      pending: Pendientes
+      completed: Completadas
+      overdue: Vencidas
+    new_form:
+      placeholder: ¿Qué hay que hacer?
+      submit: Agregar tarea
+    board:
+      filters_label: Filtrar tareas
+      summary: "%{done} de %{total} completadas · vencidas: %{overdue}"
+      empty:
+        all: Este proyecto no tiene tareas todavía.
+        pending: No hay tareas pendientes. ¡Buen trabajo!
+        completed: Aún no has completado ninguna tarea.
+        overdue: No hay tareas vencidas.
+    task:
+      complete: "Marcar «%{title}» como completada"
+      reopen: "Reabrir «%{title}»"
+      due_on: Vence el %{date}
+      overdue_since: Venció el %{date}
+      edit: Editar
+      destroy: Eliminar
+      confirm_destroy: "¿Eliminar la tarea «%{title}»?"
+    edit:
+      title: Editar tarea
+      submit: Guardar
+    create:
+      created: Tarea agregada.
+    update:
+      updated: Tarea actualizada.
+    destroy:
+      destroyed: Tarea eliminada.
