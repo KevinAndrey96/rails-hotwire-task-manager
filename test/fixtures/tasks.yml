@@ -1,0 +1,26 @@
+copy:
+  project: launch
+  title: Redactar textos de la portada
+  priority: <%= Task.priorities[:normal] %>
+  due_on: <%= Date.current + 3 %>
+
+overdue_dns:
+  project: launch
+  title: Configurar DNS del dominio
+  priority: <%= Task.priorities[:high] %>
+  due_on: <%= Date.current - 2 %>
+
+published_logo:
+  project: launch
+  title: Aprobar el logo
+  priority: <%= Task.priorities[:low] %>
+  completed_at: <%= 1.day.ago.to_fs(:db) %>
+
+someday:
+  project: launch
+  title: Escribir el blog de lanzamiento
+  priority: <%= Task.priorities[:high] %>
+
+foreign:
+  project: strangers
+  title: Tarea de otro usuario

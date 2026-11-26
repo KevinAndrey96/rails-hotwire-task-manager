@@ -1,0 +1,12 @@
+launch:
+  user: one
+  name: Lanzamiento web
+  description: Sitio corporativo y campaña de lanzamiento
+
+errands:
+  user: one
+  name: Pendientes de la casa
+
+strangers:
+  user: two
+  name: Proyecto ajeno
