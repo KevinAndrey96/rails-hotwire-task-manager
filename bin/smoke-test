@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Probes a running instance: health check, login page, auth redirect and security headers.
+set -euo pipefail
+
+base_url="${1:-http://localhost:3000}"
+
+for _ in $(seq 1 30); do
+  curl -fsS "$base_url/up" >/dev/null 2>&1 && break
+  sleep 2
+done
+
+curl -fsS "$base_url/up" >/dev/null
+echo "ok: /up"
+
+curl -fsS "$base_url/session/new" | grep -q "Iniciar sesión"
+echo "ok: login page renders in spanish"
+
+status=$(curl -s -o /dev/null -w "%{http_code}" "$base_url/")
+[ "$status" = "302" ] || { echo "expected 302 for anonymous root, got $status"; exit 1; }
+echo "ok: anonymous visitors are redirected to the login"
+
+headers=$(curl -sI "$base_url/session/new")
+grep -qi "^content-security-policy:.*frame-ancestors 'none'" <<<"$headers" || { echo "missing content security policy"; exit 1; }
+grep -qi "^x-content-type-options: nosniff" <<<"$headers" || { echo "missing nosniff header"; exit 1; }
+echo "ok: security headers present"
